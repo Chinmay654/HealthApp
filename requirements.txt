@@ -8,3 +8,4 @@ Werkzeug>=2.0
 Jinja2>=3.0
 itsdangerous>=2.0
 MarkupSafe>=2.0
+sklearn==1.0.1

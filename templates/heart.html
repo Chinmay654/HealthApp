@@ -1,0 +1,252 @@
+<!-- On this page include Model architecture and dataset snip and feature desc and feature value range as well -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+	<title>heart_pred</title>
+    
+</head>
+	<style>
+    #main-footer
+    {
+      color: #FFFFFF;
+      font-family: "Segoe UI";
+      background: #2B2B2B;
+      text-align: center;
+      margin-top: 125px;
+      padding: 16px;
+      bottom: 8px;
+    }</style>
+<body>
+    <header class="site-header">
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+      <a class="navbar-brand mr-4" href="/">Health Application</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link" href="/">Home</a>
+          <a class="nav-item nav-link" href="/about">About</a>
+          <a class="nav-item nav-link" href="/cancer">Cancer</a>
+          <a class="nav-item nav-link" href="/diabetes">Diabetes</a>
+          <a class="nav-item nav-link" href="/heart">Heart</a>
+          <a class="nav-item nav-link" href="/liver">Liver</a>
+          <!-- <a class="nav-item nav-link" href="/kidney">Kidney</a> -->
+           <a class="nav-item nav-link" href="/Malaria">Malaria</a>
+           <a class="nav-item nav-link" href="/Pneumonia">Pneumonia</a>
+
+
+        </div>
+        <!-- Navbar Right Side
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="/login">Login</a>
+          <a class="nav-item nav-link" href="/register">Register</a>
+        </div>-->
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="container",class="form-group">
+        <h1 style="color: white; text-align: center;">Heart Disease</h1>
+        <br>
+    <p>Heart disease is one of the biggest causes of morbidity and mortality among the population of the world. Prediction of cardiovascular disease is regarded as one of the most important subjects in the section of clinical data analysis. The amount of data in the healthcare industry is huge. Data mining turns the large collection of raw healthcare data into information that can help to make informed decisions and predictions.</p>
+    <h3 style="color: whitesmoke;">Symptoms</h3>
+ <ul>
+  <li>Chest pain, chest tightness, chest pressure and chest discomfort (angina)</li>
+  <li>Shortness of breath</li>
+  <li>Pain, numbness, weakness or coldness in your legs or arms if the blood vessels in those parts of your body are narrowed</li>
+  <li>Pain in the neck, jaw, throat, upper abdomen or back</li>
+</ul>
+<br>
+    <h3 style="color: white;">Dataset Source: <a href="https://archive.ics.uci.edu/ml/datasets/Heart+Disease" style="color: lightyellow;">Cleveland Heart Disease dataset</a></h3>
+    <br>
+    <h3 style="color: white;">Dataset</h3>
+    <p>The dataset used in this article is the Cleveland Heart Disease dataset taken from the UCI repository.The dataset consists of 303 individuals data. There are 14 columns in the dataset.</p>
+    <br>
+    <img src="static/datasets3.png" width="1000px" height="400px" style="border-style: solid; border-color: black;">
+    <br>
+    <br>
+    <h3 style="color: white;">Attributes</h3>
+    <p>
+      <ul>
+        <li><strong>Chest-pain type:</strong> displays the type of chest-pain experienced by the individual using the following format :
+          <ul>
+          <li>typical angina</li>
+          <li>atypical angina</li>
+          <li>non — anginal pain</li>
+          <li>asymptotic</li>
+          </ul>
+        </li>
+        <br>
+        <li>
+          <strong>TRESTBPS:</strong> displays the resting blood pressure value of an individual in mmHg (unit)
+        </li>
+        <br>
+        <li>
+          <strong>RestECG: </strong>displays resting electrocardiographic results
+          <ul>
+           <li><strong>0 = normal</strong></li>
+           <li><strong>1 = having ST-T wave abnormality</strong></li>
+           <li><strong>2 = left ventricular hyperthrophy</strong></li>
+          </ul>
+        </li>
+        <br>
+        <li>
+          <strong>Exercise induced angina :</strong>
+          <ul>
+            <li><strong>1 = yes</strong></li>
+            <li><strong>0 = no</strong></li>
+          </ul>
+        </li>
+        <br>
+        <li>
+          <strong>OldPeak: </strong>ST depression induced by exercise relative to rest.
+        </li>
+        <br>
+        <li>
+          <strong>Peak exercise ST segment :</strong>
+          <ul>
+            <li><strong>1 = upsloping</strong></li>
+            <li><strong>2 = flat</strong></li>
+            <li><strong>3 = downsloping</strong></li>
+          </ul>
+        </li>
+        <br>
+        <li>
+          <strong>Thal: </strong>displays the thalassemia 
+          <ul>
+            <li><strong>3 = normal</strong></li>
+            <li><strong>6 = fixed defect</strong></li>
+            <li><strong>7 = reversible defect</strong></li>
+          </ul>
+        </li>
+      </ul>
+    </p>
+    <br>
+    <h3 style="color: white; text-align: center;">----Heart Disease Predictor(Logistic Regression)----</h3>
+
+
+  <form action="/result" method="POST">
+    <br>
+    <br>
+    <div class="form-group">
+    <input type="number" name="age" id="age" class="form-control" required placeholder="Age : [Ranging from 0-100 ]"> 
+    <br>
+    </div>
+
+    <div class="form-group">
+    <select class="form-control" name="sex" required="required">
+    <option value="" selected>Select Gender</option>
+    <option value="1">Male</option>
+    <option value="0">Female</option>
+    </select>
+    <br>
+    </div>
+
+    <div class="form-group">
+    <select class="form-control chosenn" name="cp" required="required">
+    <option value="" selected>Select Chest Pain Type(cp)</option>
+    <option value="0">Typical Angina</option>
+    <option value="1">Atypical Angina</option>
+    <option value="2">Non Anginal Pain</option>
+    <option value="3">Asymptomatic</option>
+    </select>
+    <br>
+    </div>
+
+
+    <div class="form-group">
+    <input type="number" name="trestbps" id="trestbps" class="form-control" required placeholder="Trestbps : [Ranging from 94.00-200.0 units] ">
+    <br>
+    </div>
+
+
+    <div class="form-group">
+    <input type="number" name="chol" id="chol" class="form-control" required placeholder="Serum cholestoral in mg/dl : [Ranging from 126-564 units]">
+    <br>
+    </div>
+
+    <div class="form-group">
+    <select class="form-control chosenn" name="restecg" required="required">
+    <option value="" selected>Rresting Electrocardiographic Results(restecg)</option>
+    <option value="0">Normal</option>
+    <option value="1">Abnormal</option>
+    <option value="2">Probable</option>
+    </select>
+    <br>
+    </div>
+
+    <div class="form-group">
+    <input type="number" name="thalach" id="thalach" class="form-control" required placeholder="Max Heart Rate Achieved : [Ranging from 71-202 units]">
+    <br>
+    </div>
+
+    <div class="form-group">
+    <select class="form-control" name="exang" required="required">
+     <option value="" selected>Select Exercise Induced Angina (exang)</option>
+     <option value="1">Yes</option>
+     <option value="0">No</option>
+   </select>
+    <br>
+    </div>
+
+    <div class="form-group">
+    <input type="text" name="oldpeak" id="oldpeak" class="form-control" required placeholder="Oldpeak : [Ranging from 0-6.2 units]">
+    <br>
+    </div>
+
+    <div class="form-group">    
+    <select class="form-control chosenn" name="slope" required="required">
+     <option value="" selected>Select Peak Exercise ST Segment (Slope)</option>
+     <option value="0">Upsloping</option>
+     <option value="1">Flat</option>
+     <option value="2">Downsloping</option>
+   </select>
+    <br>
+    </div>
+
+    <div class="form-group">
+    <select class="form-control chosenn" name="thal" required="required">
+     <option value="" selected>Select Thal Type (thal)</option>
+     <option value="0">Normal</option>
+     <option value="1">Fixed</option>
+     <option value="2">Defect</option>
+     <option value="3">Reversable</option>
+   </select>
+    <br>
+    <br>
+    </div>
+    <div class="butt">
+    <input type="submit" value="Predict" style="background-color: #29AB87;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      margin-left: 493px;
+      cursor: pointer;"><br><br></div>
+</form>
+
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<footer id="main-footer">
+      Copyright &copy; 2021
+    </footer>
+</body>
+</html>

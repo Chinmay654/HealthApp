@@ -1,0 +1,52 @@
+{% extends 'nav.html' %} 
+{% block content %}
+<script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(500)
+                        .height(500);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+
+{% if message %}
+        <div class="alert alert-danger" style="margin-left: 350px; text-align: center;">{{ message }}</div>
+    {% endif %}
+<div class="row"  style="margin-bottom: 300px;">
+    <div class="col-md-3"></div>
+    <div class="col-md-8" style="margin-left: 300px;">
+        <center><h1 style="color: white;">Malaria Predictor</h1></center>
+        <div class="card card-body" style="width: 500px;">
+            <center><h3>Please upload the image of the cell</h3></center>
+            <form class="form-horizontal" action="{{ url_for('malariapredictPage') }}" method="POST" enctype="multipart/form-data">
+                <center>
+                <input onchange="readURL(this);" type="file" name="image" placeholder="Upload Image" style="color: black;">
+                <br>
+                <br>
+                <img class="img-fluid" id="blah" src="#" alt="UPLOADED IMAGE WILL APPEAR HERE" style="color: black;"/>
+                <br>
+                <br>
+                <input class="btn btn-info" type="submit">
+                </center>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %} 

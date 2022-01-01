@@ -1,0 +1,158 @@
+<!-- On this page include Model architecture and dataset snip and feature desc and feature value range as well -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+	<title>Liver Prediction</title>
+    
+</head>
+	<style>
+    #main-footer
+    {
+      color: #FFFFFF;
+      font-family: "Segoe UI";
+      background: #2B2B2B;
+      text-align: center;
+      margin-top: 125px;
+      padding: 16px;
+      bottom: 8px;
+    }</style>
+<body>
+    <header class="site-header">
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+      <a class="navbar-brand mr-4" href="/">Health Application</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link" href="/">Home</a>
+          <a class="nav-item nav-link" href="/about">About</a>
+          <a class="nav-item nav-link" href="/cancer">Cancer</a>
+          <a class="nav-item nav-link" href="/diabetes">Diabetes</a>
+          <a class="nav-item nav-link" href="/heart">Heart</a>
+          <a class="nav-item nav-link" href="/liver">Liver</a>
+          <!-- <a class="nav-item nav-link" href="/kidney">Kidney</a> -->
+           <a class="nav-item nav-link" href="/Malaria">Malaria</a>
+           <a class="nav-item nav-link" href="/Pneumonia">Pneumonia</a>
+
+
+        </div>
+        <!-- Navbar Right Side
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="/login">Login</a>
+          <a class="nav-item nav-link" href="/register">Register</a>
+        </div>-->
+      </div>
+    </div>
+  </nav>
+</header>
+<h1 style="text-align:center; color:white;">Liver Disease</h1>
+<p style="margin-left:160px; margin-right: 160px; text-align:justify;">
+  Patients with Liver disease have been continuously increasing because of excessive consumption of alcohol, inhale of harmful gases, intake of contaminated food, pickles and drugs. This dataset was used to evaluate prediction algorithms in an effort to reduce burden on doctors.
+</p>
+<br>
+
+<h1 style="text-align:center; color:white;">Dataset</h1>
+<p style="margin-left:160px; margin-right: 160px; text-align:justify;">This data set contains 416 liver patient records and 167 non liver patient records collected from North East of Andhra Pradesh, India. The "Dataset" column is a class label used to divide groups into liver patient (liver disease) or not (no disease). This data set contains 441 male patient records and 142 female patient records.</p>
+<img src="static/dataset5.png" width="1000px" height="400px" style="border-style: solid; border-color: black; margin-left: 250px;">
+<br>
+<br>
+<div class="container",class="form-group">
+
+    <h3 style="color: white; text-align: center;">Liver Disease Predictor(Random Forest)</h3>
+
+
+  <form action="/result" method="POST">
+    <br>
+    <br>
+    <div class="form-group">
+    <input type="number" name="age" id="age" class="form-control" required placeholder="Age : [Ranging from 0-100 ]"> 
+    <br>
+    </div>
+
+    <div class="form-group">
+    <input type="number" name="Total_Bilirubin" id="Total_Bilirubin" class="form-control" required placeholder="Total Bilirubin"> 
+    <br>
+    </div>
+
+    <div class="form-group">
+    <input type="number" name="Direct_Bilirubin" id="Direct_Bilirubin" class="form-control" required placeholder="Direct Bilirubin"> 
+    <br>
+    </div>
+
+    <div class="form-group">
+    <input type="number" name="Alkaline_Phosphotase" id="Alkaline_Phosphotase" class="form-control" required placeholder="Alkaline Phosphotase"> 
+    <br>
+    </div>
+
+    <div class="form-group">
+    <input type="number" name="Alamine_Aminotransferase" id="Alamine_Aminotransferase" class="form-control" required placeholder="Alamine Aminotransferase"> 
+    <br>
+    </div>
+
+    <div class="form-group">
+    <input type="number" name="Aspartate_Aminotransferase" id="Aspartate_Aminotransferase" class="form-control" required placeholder="Aspartate Aminotransferase"> 
+    <br>
+    </div>
+
+    <div class="form-group">
+    <input type="number" name="Total_Protiens" id="Total_Protiens" class="form-control" required placeholder="Total Protiens"> 
+    <br>
+    </div>
+
+    <div class="form-group">
+    <input type="number" name="Albumin" id="Albumin" class="form-control" required placeholder="Albumin"> 
+    <br>
+    </div>
+
+    <div class="form-group">
+    <input type="number" name="Albumin_and_Globulin_Ratio" id="Albumin_and_Globulin_Ratio" class="form-control" required placeholder="Albumin and Globulin Ratio"> 
+    <br>
+    </div>
+
+    <div class="form-group">
+    <select class="form-control" name="sex" required="required">
+    <option value="" selected>Select Gender</option>
+    <option value="1">Male</option>
+    <option value="0">Female</option>
+    </select>
+    <br>
+    </div>
+
+    <br>
+    <br>
+    </div>
+    <div class="butt">
+    <input type="submit" value="Predict" style="background-color: #29AB87;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      margin-left: 693px;
+      cursor: pointer;"><br><br></div>
+</form>
+
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<footer id="main-footer">
+      Copyright &copy; 2021
+    </footer>
+</body>
+</html>

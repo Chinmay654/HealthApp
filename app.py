@@ -6,7 +6,7 @@ from flask import Flask, request, render_template
 import joblib
 from tensorflow.keras.models import load_model
 from PIL import Image
-diab = joblib.load("liver.pkl")
+
 
 app = Flask(__name__)
 
